@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BGMI PRO - Ultimate Tactical Tool</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">🎯</span>
+                <span class="logo-text">BGMI PRO</span>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-section="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</li>
+                <li data-section="sensitivity"><i data-lucide="target"></i> Sensitivity</li>
+                <li data-section="crosshair"><i data-lucide="crosshair"></i> Crosshair Studio</li>
+                <li data-section="weapons"><i data-lucide="swords"></i> Weapon Stats</li>
+                <li data-section="recoil"><i data-lucide="trending-down"></i> Recoil Guide</li>
+            </ul>
+            <div class="status-badge">
+                <div class="status-dot"></div>
+                <span>Safe & Undetected</span>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content">
+            <header>
+                <div class="welcome-text">
+                    <h1>Tactical Dashboard</h1>
+                    <p>Optimize your gameplay without risk.</p>
+                </div>
+                <div class="user-profile">
+                    <span class="rank">GOLD TIER</span>
+                    <div class="avatar"></div>
+                </div>
+            </header>
+
+            <section id="recoil" class="tab-content">
+                <div class="tool-card full-width">
+                    <h2>Recoil Control Guide</h2>
+                    <p>Master the pull-down patterns for popular weapons. (Drag your mouse to practice)</p>
+                    <div class="recoil-practice-area">
+                        <div class="weapon-selector">
+                            <button class="chip active">M416</button>
+                            <button class="chip">Beryl M762</button>
+                            <button class="chip">AKM</button>
+                        </div>
+                        <div id="recoil-viz">
+                            <div class="target-center"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="dashboard" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Win Probability</h3>
+                        <div class="stat-value">+15%</div>
+                        <p>With optimized sensitivity</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Recoil Accuracy</h3>
+                        <div class="stat-value">92%</div>
+                        <p>Based on current guides</p>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <div class="map-header">
+                        <h2>Map Intel</h2>
+                        <div class="map-selector">
+                            <button class="map-chip active" data-map="erangel">Erangel</button>
+                            <button class="map-chip" data-map="livik">Livik</button>
+                            <button class="map-chip" data-map="tdm">TDM (Warehouse)</button>
+                        </div>
+                    </div>
+                    <div class="map-display" id="map-display">
+                        <div class="map-item active" id="map-erangel">
+                            <div class="map-image">
+                                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1200"
+                                    alt="Erangel">
+                                <div class="ping hot" style="top: 40%; left: 50%;">Pochinki</div>
+                                <div class="ping hot" style="top: 70%; left: 60%;">Military Base</div>
+                                <div class="ping safe" style="top: 20%; left: 30%;">Zarki</div>
+                            </div>
+                        </div>
+                        <div class="map-item" id="map-livik">
+                            <div class="map-image">
+                                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=1200"
+                                    alt="Livik">
+                                <div class="ping hot" style="top: 30%; left: 45%;">Midstein</div>
+                                <div class="ping hot" style="top: 20%; left: 60%;">Blomster</div>
+                                <div class="ping safe" style="top: 80%; left: 20%;">Holdhus</div>
+                            </div>
+                        </div>
+                        <div class="map-item" id="map-tdm">
+                            <div class="map-image">
+                                <img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b1?auto=format&fit=crop&q=80&w=1200"
+                                    alt="TDM">
+                                <div class="ping hot" style="top: 50%; left: 50%;">Center Gate</div>
+                                <div class="ping safe" style="top: 20%; left: 20%;">Team A Base</div>
+                                <div class="ping safe" style="top: 80%; left: 80%;">Team B Base</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sensitivity" class="tab-content">
+                <div class="tool-card">
+                    <h2>Sensitivity Generator</h2>
+                    <p>Select your playstyle to generate perfect settings.</p>
+                    <div class="input-group">
+                        <label>Current DPI / Sensitivity</label>
+                        <input type="number" placeholder="e.g. 1.0">
+                    </div>
+                    <div class="playstyle-options">
+                        <div class="chip active">Aggressive</div>
+                        <div class="chip">Tactical</div>
+                        <div class="chip">Sniper</div>
+                    </div>
+                    <button class="btn-secondary" id="gen-sens">Generate Best Settings</button>
+                    <div id="sens-results" class="results-box"></div>
+                </div>
+            </section>
+
+            <section id="crosshair" class="tab-content">
+                <div class="tool-card">
+                    <h2>Crosshair Studio</h2>
+                    <p>Design a custom crosshair for your screen overlay.</p>
+                    <div class="crosshair-preview-container">
+                        <div id="crosshair-preview">
+                            <div class="ch-dot"></div>
+                            <div class="ch-line ch-up"></div>
+                            <div class="ch-line ch-down"></div>
+                            <div class="ch-line ch-left"></div>
+                            <div class="ch-line ch-right"></div>
+                        </div>
+                    </div>
+                    <div class="controls-grid">
+                        <div class="control-item">
+                            <label>Size</label>
+                            <input type="range" id="ch-size" min="5" max="50" value="20">
+                        </div>
+                        <div class="control-item">
+                            <label>Gap</label>
+                            <input type="range" id="ch-gap" min="0" max="20" value="5">
+                        </div>
+                        <div class="control-item">
+                            <label>Thickness</label>
+                            <input type="range" id="ch-thickness" min="1" max="10" value="2">
+                        </div>
+                        <div class="control-item">
+                            <label>Color</label>
+                            <input type="color" id="ch-color" value="#00ff00">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="weapons" class="tab-content">
+                <div class="tool-card full-width">
+                    <h2>Weapon Combat Analyzer</h2>
+                    <p>Compare time-to-kill (TTK) statistics.</p>
+                    <table class="weapon-table">
+                        <thead>
+                            <tr>
+                                <th>Weapon</th>
+                                <th>Damage</th>
+                                <th>Fire Rate</th>
+                                <th>TTK</th>
+                                <th>Recoil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>M416</td>
+                                <td>41</td>
+                                <td>0.086s</td>
+                                <td>0.258s</td>
+                                <td>Very Low</td>
+                            </tr>
+                            <tr>
+                                <td>Beryl M762</td>
+                                <td>44</td>
+                                <td>0.086s</td>
+                                <td>0.258s</td>
+                                <td>High</td>
+                            </tr>
+                            <tr>
+                                <td>AKM</td>
+                                <td>47</td>
+                                <td>0.100s</td>
+                                <td>0.300s</td>
+                                <td>Moderate</td>
+                            </tr>
+                            <tr>
+                                <td>AWM</td>
+                                <td>105</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>N/A</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
