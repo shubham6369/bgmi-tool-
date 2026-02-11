@@ -222,9 +222,85 @@ chips.forEach(chip => {
     chip.addEventListener('click', saveSettings);
 });
 
+// Tactical Trace Logic
+const traceBtn = document.getElementById('toggle-trace');
+const traceCanvas = document.getElementById('trace-canvas');
+const ctx = traceCanvas.getContext('2d');
+let isTraceMode = false;
+let tracePoints = [];
+
+function resizeCanvas() {
+    traceCanvas.width = traceCanvas.parentElement.clientWidth;
+    traceCanvas.height = 400;
+}
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+traceBtn.addEventListener('click', () => {
+    isTraceMode = !isTraceMode;
+    traceBtn.classList.toggle('active');
+    traceCanvas.classList.toggle('active');
+
+    if (!isTraceMode) {
+        ctx.clearRect(0, 0, traceCanvas.width, traceCanvas.height);
+        tracePoints = [];
+    }
+});
+
+traceCanvas.addEventListener('click', (e) => {
+    if (!isTraceMode) return;
+
+    const rect = traceCanvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    tracePoints.push({ x, y });
+
+    // Draw the points and lines
+    drawTrace();
+});
+
+function drawTrace() {
+    ctx.clearRect(0, 0, traceCanvas.width, traceCanvas.height);
+
+    if (tracePoints.length === 0) return;
+
+    ctx.strokeStyle = '#ef4444';
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.setLineDash([5, 5]); // Dashed line for tactical look
+
+    ctx.beginPath();
+    ctx.moveTo(tracePoints[0].x, tracePoints[0].y);
+
+    tracePoints.forEach((p, index) => {
+        // Draw point
+        ctx.fillStyle = '#ef4444';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (index > 0) {
+            ctx.lineTo(p.x, p.y);
+        }
+    });
+
+    ctx.stroke();
+
+    // Add "Enemy Path" label at last point
+    if (tracePoints.length > 0) {
+        const last = tracePoints[tracePoints.length - 1];
+        ctx.fillStyle = '#ef4444';
+        ctx.font = 'bold 12px Outfit';
+        ctx.fillText('ENEMY TRAJECTORY', last.x + 10, last.y - 10);
+    }
+}
+
 // Simulate Loading
 window.addEventListener('load', () => {
     console.log('BGMI Tactical Tool Initialized');
     updateCrosshair();
-    loadSettings(); // Load everything back when browser opens
+    loadSettings();
+    resizeCanvas();
 });

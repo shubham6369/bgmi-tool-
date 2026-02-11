@@ -494,6 +494,49 @@ input {
     display: block;
 }
 
+.btn-trace {
+    background: rgba(255, 153, 0, 0.1);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+    margin-left: 0.5rem;
+}
+
+.btn-trace.active {
+    background: var(--primary-color);
+    color: black;
+}
+
+#map-display {
+    position: relative;
+    width: 100%;
+}
+
+#trace-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    /* Match map height */
+    z-index: 50;
+    pointer-events: none;
+    /* Only enable when trace mode is on */
+}
+
+#trace-canvas.active {
+    pointer-events: all;
+    cursor: crosshair;
+}
+
 .map-image {
     position: relative;
     width: 100%;

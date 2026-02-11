@@ -82,9 +82,13 @@
                             <button class="map-chip active" data-map="erangel">Erangel</button>
                             <button class="map-chip" data-map="livik">Livik</button>
                             <button class="map-chip" data-map="tdm">TDM (Warehouse)</button>
+                            <button class="btn-trace" id="toggle-trace">
+                                <i data-lucide="spline"></i> Trace Mode
+                            </button>
                         </div>
                     </div>
                     <div class="map-display" id="map-display">
+                        <canvas id="trace-canvas"></canvas>
                         <div class="map-item active" id="map-erangel">
                             <div class="map-image">
                                 <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1200"
