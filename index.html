@@ -4,96 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BGMI PRO - Tactical Tracer</title>
+    <title>SURE-SHOT TRACER</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#FF9900">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
-<body>
-    <div class="app-container">
-        <!-- Sidebar Navigation -->
-        <nav class="sidebar">
-            <div class="logo">
-                <span class="logo-icon">🎯</span>
-                <span class="logo-text">TRACER PRO</span>
+<body class="minimal">
+    <div class="tracer-container">
+        <div class="map-controls">
+            <div class="chip-row">
+                <button class="map-chip active" data-map="erangel">ERANGEL</button>
+                <button class="map-chip" data-map="livik">LIVIK</button>
+                <button class="map-chip" data-map="tdm">TDM</button>
             </div>
-            <ul class="nav-links">
-                <li class="active" data-section="dashboard"><i data-lucide="map"></i> Tactical Map</li>
-            </ul>
-        </nav>
+            <div class="action-row">
+                <button class="btn-primary" id="clear-trace">CLEAR TRACE</button>
+                <button class="btn-pip" id="launch-overlay">LAUNCH FLOATING OVERLAY</button>
+            </div>
+        </div>
 
-        <!-- Main Content -->
-        <main class="content">
-            <header>
-                <div class="welcome-text">
-                    <h1>Tactical Tracer</h1>
-                    <p>Track enemy movements and predict rotations.</p>
-                </div>
-            </header>
+        <div class="map-area">
+            <canvas id="trace-canvas"></canvas>
+            <video id="pip-video" autoplay muted playsinline style="display:none;"></video>
 
-            <section id="dashboard" class="tab-content active">
-                <div class="map-container">
-                    <div class="map-header">
-                        <h2>Map Intel</h2>
-                        <div class="map-selector">
-                            <button class="map-chip active" data-map="erangel">Erangel</button>
-                            <button class="map-chip" data-map="livik">Livik</button>
-                            <button class="map-chip" data-map="tdm">TDM</button>
-                            <button class="btn-trace active" id="toggle-trace">
-                                <i data-lucide="spline"></i> Trace Mode: ON
-                            </button>
-                            <button class="btn-clear" id="clear-trace">
-                                <i data-lucide="trash-2"></i> Clear
-                            </button>
-                        </div>
-                    </div>
-                    <div class="map-display" id="map-display">
-                        <canvas id="trace-canvas"></canvas>
-                        <div class="map-item active" id="map-erangel">
-                            <div class="map-image">
-                                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1200"
-                                    alt="Erangel">
-                            </div>
-                        </div>
-                        <div class="map-item" id="map-livik">
-                            <div class="map-image">
-                                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=1200"
-                                    alt="Livik">
-                            </div>
-                        </div>
-                        <div class="map-item" id="map-tdm">
-                            <div class="map-image">
-                                <img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b1?auto=format&fit=crop&q=80&w=1200"
-                                    alt="TDM">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="instructions">
-                    <h3>How to Trace:</h3>
-                    <ul>
-                        <li>1. Select your Map (Erangel / Livik / TDM).</li>
-                        <li>2. Click anywhere on the map to mark enemy positions.</li>
-                        <li>3. The tool will draw the trajectory line automatically.</li>
-                        <li>4. Use "Clear" to start a new trace.</li>
-                    </ul>
-                </div>
-            </section>
-        </main>
+            <div class="map-item active" id="map-erangel">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1200"
+                    alt="E">
+            </div>
+            <div class="map-item" id="map-livik">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=1200"
+                    alt="L">
+            </div>
+            <div class="map-item" id="map-tdm">
+                <img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b1?auto=format&fit=crop&q=80&w=1200"
+                    alt="T">
+            </div>
+        </div>
     </div>
 
     <script src="main.js"></script>
     <script>
         lucide.createIcons();
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js');
-            });
-        }
     </script>
 </body>
 
