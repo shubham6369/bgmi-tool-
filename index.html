@@ -4,44 +4,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SURE-SHOT TRACER</title>
+    <title>BGMI PRO - Tactical Tracer</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
-<body class="minimal">
-    <div class="tracer-container">
-        <div class="map-controls">
-            <div class="chip-row">
-                <button class="map-chip active" data-map="erangel">ERANGEL</button>
-                <button class="map-chip" data-map="livik">LIVIK</button>
-                <button class="map-chip" data-map="tdm">TDM</button>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">🎯</span>
+                <span class="logo-text">TRACER PRO</span>
             </div>
-            <div class="action-row">
-                <button class="btn-primary" id="clear-trace">CLEAR TRACE</button>
-                <button class="btn-pip" id="launch-overlay">LAUNCH FLOATING OVERLAY</button>
+            <ul class="nav-links">
+                <li class="active"><i data-lucide="crosshair"></i> Enemy Tracer</li>
+            </ul>
+            <div class="status-badge">
+                <div class="status-dot"></div>
+                <span>Background Safe</span>
             </div>
-        </div>
+        </nav>
 
-        <div class="map-area">
-            <canvas id="trace-canvas"></canvas>
-            <video id="pip-video" autoplay muted playsinline style="display:none;"></video>
+        <!-- Main Content -->
+        <main class="content">
+            <header>
+                <div class="welcome-text">
+                    <h1>Tactical Tracer</h1>
+                    <p>Track enemy movements in the background.</p>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-primary" id="clear-trace">CLEAR</button>
+                    <button class="btn-special" id="launch-overlay">LAUNCH FLOATING</button>
+                </div>
+            </header>
 
-            <div class="map-item active" id="map-erangel">
-                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1200"
-                    alt="E">
-            </div>
-            <div class="map-item" id="map-livik">
-                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=1200"
-                    alt="L">
-            </div>
-            <div class="map-item" id="map-tdm">
-                <img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b1?auto=format&fit=crop&q=80&w=1200"
-                    alt="T">
-            </div>
-        </div>
+            <section id="dashboard" class="tab-content active">
+                <div class="map-container">
+                    <div class="map-header">
+                        <h2>Map Strategy Intel</h2>
+                        <div class="map-selector">
+                            <button class="map-chip active" data-map="erangel">Erangel</button>
+                            <button class="map-chip" data-map="livik">Livik</button>
+                            <button class="map-chip" data-map="tdm">TDM</button>
+                        </div>
+                    </div>
+                    <div class="map-display" id="map-display">
+                        <canvas id="trace-canvas"></canvas>
+                        <video id="pip-video" autoplay muted playsinline style="display:none;"></video>
+
+                        <div class="map-item active" id="map-erangel">
+                            <div class="map-image">
+                                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1200"
+                                    alt="Erangel">
+                            </div>
+                        </div>
+                        <div class="map-item" id="map-livik">
+                            <div class="map-image">
+                                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=1200"
+                                    alt="Livik">
+                            </div>
+                        </div>
+                        <div class="map-item" id="map-tdm">
+                            <div class="map-image">
+                                <img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b1?auto=format&fit=crop&q=80&w=1200"
+                                    alt="TDM">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-box">
+                    <p><i data-lucide="info"></i> Tap 'Launch Floating' then open BGMI for background advantage.</p>
+                </div>
+            </section>
+        </main>
     </div>
 
     <script src="main.js"></script>
