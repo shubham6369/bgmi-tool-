@@ -82,6 +82,28 @@ pipBtn.addEventListener('click', async () => {
     }
 });
 
+// APK Popup Logic
+const apkPopup = document.getElementById('apk-popup');
+const closePopupBtn = document.getElementById('close-popup');
+
+if (apkPopup && closePopupBtn) {
+    // Show popup immediately on load
+    window.addEventListener('load', () => {
+        apkPopup.style.display = 'flex';
+    });
+
+    closePopupBtn.addEventListener('click', () => {
+        apkPopup.style.display = 'none';
+    });
+
+    // Close on outside click
+    apkPopup.addEventListener('click', (e) => {
+        if (e.target === apkPopup) {
+            apkPopup.style.display = 'none';
+        }
+    });
+}
+
 window.addEventListener('load', () => {
     resizeCanvas();
     setInterval(drawTrace, 100);
